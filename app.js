@@ -37,6 +37,7 @@ app.use(expressJWT.expressjwt({
 const routes = require("./routes")
 app.use("/auth",routes.authRouter)
 app.use("/package",routes.packageRouter)
+app.use("/user",routes.userRouter)
 
 app.listen(process.env.PORT, ()=>{
     console.log(`PaieCash Test Server Started on port ${process.env.PORT}`)

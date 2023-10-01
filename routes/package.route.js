@@ -6,8 +6,6 @@ const defaultControllerMiddlerWare = require("./../shared/default-controller")
 //create
 router.post("/create", validators.PackageValidator.PackageCreationValidator,defaultControllerMiddlerWare.defaultControllerMiddlerWare,packageController.create)
 
-
-
 //list all
 router.get("/list", packageController.findAll)
 

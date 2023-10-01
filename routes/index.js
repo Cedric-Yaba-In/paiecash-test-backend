@@ -1,4 +1,5 @@
 module.exports = {
     authRouter:require("./auth.route"),
-    packageRouter:require("./package.route")
+    packageRouter:require("./package.route"),
+    userRouter:require("./user.route")
 }

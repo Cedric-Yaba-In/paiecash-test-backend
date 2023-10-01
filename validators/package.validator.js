@@ -23,7 +23,6 @@ module.exports.PackageSubscribeValidator=checkSchema({
     userid:{
         custom:{
             options:async (value)=>{
-                console.log(value)
                 let userfound = await userService.findOneByField({id:value});
                 if(!userfound) throw new Error(`User with id ${value} not exist`);
             }

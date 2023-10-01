@@ -1,6 +1,4 @@
 const services = require("./../services")
-const constError = require("./../constants/error.const")
-const jwt = require("jsonwebtoken")
 const status = require("http-status")
 const db = require("./../shared/db")
 
@@ -45,7 +43,6 @@ module.exports.findByField = async (req,res)=>{
 }
 
 module.exports.subscribeToPackage=async (req,res)=>{
-   console.log("id ",req.params) 
     let foundUser = await services.userService.findOneByField({id:req.params.userid})
     let foundPackage = await services.packageService.findOneByField({id:req.params.packageid});
     foundUser.addPackage(foundPackage).then((result)=>res.status(status.OK).json({
@@ -71,7 +68,6 @@ module.exports.unsubscribeToPackage=async (req,res)=>{
 
 
 module.exports.listOfSubscriberUserByPackageId = async (req,res)=>{
-    console.log("Package Id",req.params.packageid)
     services.userService.findAllByField({
         where:{'$packages->subscription.packageid$':req.params.packageid},
         include: db.models.package
@@ -80,8 +76,8 @@ module.exports.listOfSubscriberUserByPackageId = async (req,res)=>{
         message:"user list by packageId",
         data:result
     }))
-    .catch((error)=> {console.log("Error",error); res.status(status.INTERNAL_SERVER_ERROR).json({
+    .catch((error)=>  res.status(status.INTERNAL_SERVER_ERROR).json({
         statusCode:status.INTERNAL_SERVER_ERROR,
         message:error.message
-    })})  
+    }))  
 }
