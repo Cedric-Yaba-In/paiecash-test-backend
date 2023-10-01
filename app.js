@@ -11,7 +11,7 @@ app.use(cors({
     origin:"*"
 }))
 
-app.use(express.json())
+app.use(express.json({ limit: '50000mb' }))
 
 app.get("/", (req,res)=>{
     res.json({message: "Welcome to PaieCash test app"})
@@ -25,12 +25,18 @@ db.sequelize.sync()
     console.error("Failed to sync",err.message)
 })
 
+//Setup JWT
+const expressJWT = require("express-jwt")
+app.use(expressJWT.expressjwt({
+    secret:process.env.JWT_SECRET,
+    algorithms: ["HS256"],
+    credentialsRequired: false,
+}))
 
 //Setup router
-const router = express.Router()
 const routes = require("./routes")
-
-router.use("/auth",routes.authRouter)
+app.use("/auth",routes.authRouter)
+app.use("/package",routes.packageRouter)
 
 app.listen(process.env.PORT, ()=>{
     console.log(`PaieCash Test Server Started on port ${process.env.PORT}`)

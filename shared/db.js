@@ -5,13 +5,19 @@ const sequelize  = new Sequelize(process.env.MySQL_DB,process.env.MySQL_User,pro
     dialect: "mysql"
     }
 )
+const userModel = require("./../models/user.model")(sequelize,DataTypes)
+const packageModel = require("./../models/package.model")(sequelize,DataTypes)
+
+userModel.belongsToMany(packageModel, { through: 'subscription' });
+packageModel.belongsToMany(userModel, { through: 'subscription' });
+
 
 module.exports = {
     Sequelize,
     sequelize,
     models: {
-        users:require("./../models/user.model")(sequelize,DataTypes),
-        package:require("./../models/package.model")(sequelize,DataTypes)
+        users:userModel,
+        package:packageModel
     }
 }
 
