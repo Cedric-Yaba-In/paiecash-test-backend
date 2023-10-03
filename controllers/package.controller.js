@@ -81,3 +81,17 @@ module.exports.listOfSubscriberUserByPackageId = async (req,res)=>{
         message:error.message
     }))  
 }
+
+module.exports.listOfSubscriberAllUser = async (req,res)=>{
+    services.userService.findAllByField({
+        include: db.models.package
+    }).then((result)=>res.status(status.OK).json({
+        statusCode:status.OK,
+        message:"user list",
+        data:result
+    }))
+    .catch((error)=>  res.status(status.INTERNAL_SERVER_ERROR).json({
+        statusCode:status.INTERNAL_SERVER_ERROR,
+        message:error.message
+    }))  
+}

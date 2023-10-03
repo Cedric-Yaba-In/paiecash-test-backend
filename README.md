@@ -2,15 +2,15 @@
   <img src="https://miro.medium.com/v2/resize:fit:1400/1*XP-mZOrIqX7OsFInN2ngRQ.png" width="200" alt="Nest Logo" />
 </p>
 
-
-
-
-
 ## Installation
 
 ```bash
 $ npm install
 ```
+
+## Configuration
+<p> To make the application work, you must create a MySQL database and put the name of the database in the `MySQL_DB` parameter contained in the `.env` file.
+</p>
 
 ## Running the app
 

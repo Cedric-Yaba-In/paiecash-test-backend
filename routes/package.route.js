@@ -9,8 +9,14 @@ router.post("/create", validators.PackageValidator.PackageCreationValidator,defa
 //list all
 router.get("/list", packageController.findAll)
 
+
+router.get("/subscriber/list",packageController.listOfSubscriberAllUser)
+
+
 //subscriber list
 router.get("/subscriber/:packageid",validators.PackageValidator.PackageSubscriberListValidator,defaultControllerMiddlerWare.defaultControllerMiddlerWare,packageController.listOfSubscriberUserByPackageId)
+
+
 
 
 //subscribe
